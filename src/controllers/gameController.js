@@ -3,6 +3,11 @@ const router = require('express').Router();
 const gameManager = require('../managers/gameManager');
 const { getErrorMessage } = require('../utils/errorHelpers');
 
+
+router.get('/', (req, res) => {
+    res.render('games');
+})
+
 router.get('/create', (req, res) => {
     res.render('games/create');
 });
