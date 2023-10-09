@@ -4,8 +4,11 @@ const gameManager = require('../managers/gameManager');
 const { getErrorMessage } = require('../utils/errorHelpers');
 
 
-router.get('/', (req, res) => {
-    res.render('games');
+router.get('/', async (req, res) => {
+
+    const games = await gameManager.getAll().lean();
+
+    res.render('games', {games});
 })
 
 router.get('/create', (req, res) => {
