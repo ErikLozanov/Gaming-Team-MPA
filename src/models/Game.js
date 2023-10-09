@@ -30,6 +30,9 @@ const gameSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
     },
+    boughtBy: {
+        type: Array,
+    },
 });
 
 

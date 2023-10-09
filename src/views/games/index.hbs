@@ -2,14 +2,15 @@
     <main id="catalog">
         <section class="game-market">
             <h1>Game Trade Code</h1>
-                {{#each games}}
             <div class="offer-list">
+                {{#each games}}
                 {{>game}}
-            </div>
-            {{else}}
-             <div class="no-offer">
+                {{else}}
+                             <div class="no-offer">
                 <p>There are no game offers found!</p>
             </div> 
-            {{/each}}
+                {{/each}}
+            </div>
+
         </section>
     </main>
