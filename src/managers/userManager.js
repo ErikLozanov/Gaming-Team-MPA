@@ -4,8 +4,8 @@ const jwt = require('../lib/jwt');
 const User = require('../models/User');
 const { SECRET } = require('../config/config');
 
-exports.login = async (username, password) => {
-    const user = await User.findOne({username});
+exports.login = async (email, password) => {
+    const user = await User.findOne({email});
 
     if (!user) {
         throw new Error('Invalid user or password!');
