@@ -48,6 +48,17 @@ router.get("/:gameId/details", async (req, res) => {
     res.render("games/details", { game, isOwner, isBought, buyGame, isLogged });
 });
 
+router.get("/:gameId/delete", async (req,res) => {
+    const gameId = req.params.gameId;
+
+    try {
+        await gameManager.deleteGame(gameId);
+    } catch (err) {
+        res.render("games/details", { error: getErrorMessage(err), gameData });
+    }
+    res.redirect("/games");
+});
+
 // router.post(':gameId/bought', async (req, res) => {
 //     const gameId = req.params.gameId;
 //     const buyerId = req.user._id;
