@@ -33,16 +33,18 @@ router.get("/:gameId/details", async (req, res) => {
 
     async function buyGame() {
         const gameId = req.params.gameId;
-        const buyerId = req.user._id;
+        const buyerId = req.user?._id;
 
         const game = await gameManager.getOne(gameId).lean();
         game.boughtBy.push(buyerId);
         console.log(game);
         await gameManager.boughtGame(gameId, game);
     }
+
+
     const game = await gameManager.getOne(gameId).lean();
     const isOwner = req.user?._id == game.owner._id;
-    const isBought = game.boughtBy.some((gameId) => gameId === req.user._id);
+    const isBought = game.boughtBy.some((gameId) => gameId === req.user?._id);
     res.render("games/details", { game, isOwner, isBought, buyGame });
 });
 
