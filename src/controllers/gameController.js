@@ -30,7 +30,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/:gameId/details", async (req, res) => {
     const gameId = req.params.gameId;
-
+    const isLogged = req.user?._id;
     async function buyGame() {
         const gameId = req.params.gameId;
         const buyerId = req.user?._id;
@@ -45,7 +45,7 @@ router.get("/:gameId/details", async (req, res) => {
     const game = await gameManager.getOne(gameId).lean();
     const isOwner = req.user?._id == game.owner._id;
     const isBought = game.boughtBy.some((gameId) => gameId === req.user?._id);
-    res.render("games/details", { game, isOwner, isBought, buyGame });
+    res.render("games/details", { game, isOwner, isBought, buyGame, isLogged });
 });
 
 // router.post(':gameId/bought', async (req, res) => {

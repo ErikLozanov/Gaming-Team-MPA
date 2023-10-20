@@ -14,6 +14,7 @@
                     <p id="description">{{game.description}}</p>
                 </div>
                 <div class="product-btn">
+                    {{#if isLogged}}
                     {{#if isOwner}}
                     <!--Only for registered user and author of the publication -->
                     <div class="author">
@@ -25,6 +26,7 @@
                      <p class="buy-message">You have already bought this game</p>
                     {{else}}
                     <a href="/games/{{game._id}}/details" onclick="{{buyGame}}" class="btn-buy">Buy</a>
+                    {{/if}}
                     {{/if}}
                     {{/if}}
 
