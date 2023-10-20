@@ -9,6 +9,12 @@ router.get("/", async (req, res) => {
     res.render("games", { games });
 });
 
+router.get('/search', async (req, res) => {
+    const games = await gameManager.getAll().lean();
+
+    res.render("search", { games });
+})
+
 router.get("/create", (req, res) => {
     res.render("games/create");
 });
@@ -24,7 +30,7 @@ router.post("/create", async (req, res) => {
 
         res.redirect("/games");
     } catch (err) {
-        res.render("games/create", { error: getErrorMessage(err), gameData });
+        res.render("games/create", { error: getErrorMessage(err), ...gameData });
     }
 });
 
@@ -37,7 +43,6 @@ router.get("/:gameId/details", async (req, res) => {
 
         const game = await gameManager.getOne(gameId).lean();
         game.boughtBy.push(buyerId);
-        console.log(game);
         await gameManager.boughtGame(gameId, game);
     }
 
@@ -78,14 +83,6 @@ router.post("/:gameId/edit", async (req,res) => {
     } catch (err) {
         console.log('error');
     }
-})
-
-// router.post(':gameId/bought', async (req, res) => {
-//     const gameId = req.params.gameId;
-//     const buyerId = req.user._id;
-//      await gameManager.boughtGame(gameId,buyerId);
-
-//      res.redirect(`/games/${gameId}/details`);
-// });
+});
 
 module.exports = router;
