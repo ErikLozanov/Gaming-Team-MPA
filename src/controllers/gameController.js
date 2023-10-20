@@ -59,6 +59,14 @@ router.get("/:gameId/delete", async (req,res) => {
     res.redirect("/games");
 });
 
+router.get("/:gameId/edit", async (req, res) => {
+    const gameId = req.params.gameId;
+
+    const game = await gameManager.getOne(gameId).lean();
+    console.log(game);
+    res.render('games/edit', {game});
+})
+
 // router.post(':gameId/bought', async (req, res) => {
 //     const gameId = req.params.gameId;
 //     const buyerId = req.user._id;
