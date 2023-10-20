@@ -13,6 +13,15 @@ router.get('/search', async (req, res) => {
     const games = await gameManager.getAll().lean();
 
     res.render("search", { games });
+});
+
+router.post('/search', async (req, res) => {
+    const {name, platform} = req.body;
+
+    const games = await gameManager.searchGame(name,platform).lean();
+    console.log('hi!');
+    console.log(games);
+    res.render("search", {games});
 })
 
 router.get("/create", (req, res) => {
