@@ -9,3 +9,5 @@ exports.getOne = (gameId) => Game.findById(gameId).populate('owner');
 exports.boughtGame = (gameId, updatedGame) => Game.findByIdAndUpdate(gameId, updatedGame);
 
 exports.deleteGame = (gameId) => Game.findByIdAndDelete(gameId);
+
+exports.editGame = (gameId,editedGame) => Game.findByIdAndUpdate(gameId,editedGame);

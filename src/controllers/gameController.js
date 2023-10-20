@@ -63,8 +63,21 @@ router.get("/:gameId/edit", async (req, res) => {
     const gameId = req.params.gameId;
 
     const game = await gameManager.getOne(gameId).lean();
-    console.log(game);
     res.render('games/edit', {game});
+})
+
+router.post("/:gameId/edit", async (req,res) => {
+    const gameId = req.params.gameId;
+
+    const editedGame = req.body;
+    console.log(editedGame);
+    try {
+        await gameManager.editGame(gameId,editedGame);
+        res.redirect(`/games/${gameId}/details`);
+        console.log('hi!');
+    } catch (err) {
+        console.log('error');
+    }
 })
 
 // router.post(':gameId/bought', async (req, res) => {
